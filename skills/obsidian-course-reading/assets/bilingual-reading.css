@@ -1,0 +1,121 @@
+.markdown-preview-view.bilingual-reading .markdown-preview-sizer {
+  max-width: none;
+  width: min(96%, 1500px);
+  background-image: linear-gradient(
+    to right,
+    transparent calc(50% - 0.5px),
+    var(--background-modifier-border) calc(50% - 0.5px),
+    var(--background-modifier-border) calc(50% + 0.5px),
+    transparent calc(50% + 0.5px)
+  );
+}
+
+.bilingual-reading .bilingual-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  margin: 0 0 0.55rem;
+}
+
+.bilingual-reading .bilingual-source,
+.bilingual-reading .bilingual-translation {
+  line-height: 1.7;
+}
+
+.bilingual-reading .bilingual-source {
+  padding: 0.15rem 1.15rem 0.45rem 0;
+}
+
+.bilingual-reading .bilingual-translation {
+  padding: 0.15rem 0 0.45rem 1.15rem;
+}
+
+.bilingual-reading .module-source {
+  color: var(--text-muted);
+  font-size: 0.85em;
+}
+
+.bilingual-reading img {
+  display: block;
+  max-width: 100%;
+  margin: 1rem auto;
+}
+
+@media (max-width: 720px) {
+  .markdown-preview-view.bilingual-reading .markdown-preview-sizer {
+    width: 100%;
+    background-image: none;
+  }
+
+  .bilingual-reading .bilingual-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .bilingual-reading .bilingual-source {
+    padding-right: 0;
+    border-bottom: 1px solid var(--background-modifier-border);
+  }
+
+  .bilingual-reading .bilingual-translation {
+    padding-left: 0;
+  }
+}
+
+/* Native Markdown tables: editable bilingual reading. */
+/* IMPORTANT 1 — 选择器范围：表格规则必须限定在正文区域内（.cm-content / .markdown-preview-sizer）。
+   Editing Toolbar 的工具栏被插在 .markdown-source-view 下（与 .cm-editor 同级），
+   它的颜色面板本身就是 <table class="x-color-picker-table">，每个色块靠
+   <td style="background-color:..."> 的内联样式上色。若写成 .editable-bilingual table td
+   这种宽泛选择器 + !important，会覆盖内联样式，导致色板全部变透明、只能盲选。
+   IMPORTANT 2 — 单元格内边距：实时预览下 Obsidian 把单元格内边距放在 .table-cell-wrapper 上，
+   td/th 必须保持 padding:0。给 td 加内边距会让单元格边缘出现约 1.4rem 的点击死区，
+   点在那里不会命中可编辑的 .table-cell-wrapper，点击穿透到外层编辑器，
+   光标被放到表格之后（表现为「点不中内容、光标跳到下一句」）。
+   IMPORTANT 3 — 点击单元格时文字不能位移。实时预览的单元格有两个状态：
+   未聚焦时是「渲染态」（纯文本直接放在 .table-cell-wrapper 里，行高与折行继承自 td），
+   聚焦后 Obsidian 会隐藏它，并在同一个 td 里插入第二个 .table-cell-wrapper 装一个真实的
+   CodeMirror 迷你编辑器。这个迷你编辑器不继承 td 的 line-height / white-space，
+   而是读 Obsidian 自己的两个变量：
+     .cm-table-widget .cm-scroller          { line-height: var(--table-line-height) }  默认 1.3
+     .cm-table-widget .cm-content.cm-lineWrapping { white-space: var(--table-white-space) } 默认 break-spaces
+   本片段把 td 设成 line-height:1.8 / white-space:normal，两态于是不一致：
+   点进去行高由 28.8px 掉到 20.8px，折行也从 normal 变 break-spaces（还会多折出一行），
+   整行高度骤降、文字整体上移，而光标仍停在点击处 —— 即「选中后文字往上缩、光标错位」。
+   把这两个变量对齐到渲染态即可消除位移；渲染态外观与光标定位精度都不受影响。 */
+.markdown-preview-view.editable-bilingual .markdown-preview-sizer,
+.markdown-source-view.editable-bilingual .cm-sizer {max-width:1500px;width:96%;margin-inline:auto;}
+.editable-bilingual {--table-border-width:0px;--table-row-background-hover:transparent;--table-row-alt-background:transparent;--table-line-height:1.8;--table-white-space:pre-wrap;}
+.editable-bilingual :is(.cm-content,.markdown-preview-sizer) table {width:100%;table-layout:fixed;border-collapse:collapse;border:0!important;background:transparent;}
+.editable-bilingual :is(.cm-content,.markdown-preview-sizer) table td,
+.editable-bilingual :is(.cm-content,.markdown-preview-sizer) table th {width:50%;white-space:normal;overflow-wrap:break-word;vertical-align:top;border:0!important;background:transparent!important;line-height:1.8;padding:0;}
+.editable-bilingual :is(.cm-content,.markdown-preview-sizer) table td:first-child,
+.editable-bilingual :is(.cm-content,.markdown-preview-sizer) table th:first-child {border-right:1px solid var(--background-modifier-border)!important;}
+.editable-bilingual :is(.cm-content,.markdown-preview-sizer) table th:empty {padding:0!important;height:0;line-height:0;}
+.markdown-preview-view.editable-bilingual :is(.cm-content,.markdown-preview-sizer) table thead:has(th:empty) {display:none;}
+.editable-bilingual :is(.cm-content,.markdown-preview-sizer) table td p {margin:0;}
+
+/* 阅读模式：没有 .table-cell-wrapper，内边距直接加在 td/th 上。 */
+.markdown-preview-view.editable-bilingual .markdown-preview-sizer table td,
+.markdown-preview-view.editable-bilingual .markdown-preview-sizer table th {padding:.2rem 1.4rem 1rem!important;}
+.markdown-preview-view.editable-bilingual .markdown-preview-sizer table td:first-child,
+.markdown-preview-view.editable-bilingual .markdown-preview-sizer table th:first-child {padding-left:0!important;}
+.markdown-preview-view.editable-bilingual .markdown-preview-sizer table td:last-child,
+.markdown-preview-view.editable-bilingual .markdown-preview-sizer table th:last-child {padding-right:0!important;}
+
+/* 实时预览：内边距必须落在 .table-cell-wrapper 上，td/th 保持 padding:0（见 IMPORTANT 2）。
+   Obsidian 的 .table-cell-wrapper 自带 var(--size-2-2) / var(--size-4-2) 内边距，
+   这里用 calc 叠加上去，保证外观与修改前逐像素一致，只有点击热区变完整。 */
+.markdown-source-view.mod-cm6.editable-bilingual .cm-table-widget :is(td,th) .table-cell-wrapper {padding:calc(var(--size-2-2) + .2rem) calc(var(--size-4-2) + 1.4rem) calc(var(--size-2-2) + 1rem);white-space:normal;overflow-wrap:break-word;}
+.markdown-source-view.mod-cm6.editable-bilingual .cm-table-widget :is(td,th):first-child .table-cell-wrapper {padding-left:var(--size-4-2);}
+.markdown-source-view.mod-cm6.editable-bilingual .cm-table-widget :is(td,th):last-child .table-cell-wrapper {padding-right:var(--size-4-2);}
+
+.editable-bilingual .cm-table-widget {margin:0!important;}
+.editable-bilingual .table-cell-wrapper {white-space:normal;overflow-wrap:break-word;}
+.editable-bilingual .cm-content {max-width:none;}
+.editable-bilingual .table-wrapper {width:100%;}
+@container (max-width:720px) {
+ .markdown-preview-view.editable-bilingual .markdown-preview-sizer :is(table,tbody,tr,td) {display:block;width:100%;}
+ .markdown-preview-view.editable-bilingual .markdown-preview-sizer table td {padding:.2rem 0 .8rem!important;border:0!important;}
+}
+
+.markdown-preview-view.editable-bilingual .markdown-preview-sizer {background-image:none;}
+.markdown-preview-view.editable-bilingual {container-type:inline-size;}

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Obsidian 课程文献阅读"
+  short_description: "按课程周次整理中外文阅读，生成含研究设计、原文定位与讨论的导读笔记"
+  default_prompt: "Use $obsidian-course-reading to prepare this course PDF for class in my preferred language and save the Reading and Guide to my Obsidian vault."
+
+policy:
+  allow_implicit_invocation: true
