@@ -89,6 +89,18 @@ Skill 目录：[skills/obsidian-course-reading](skills/obsidian-course-reading/)
 
 Guide 内容规范以 [output-spec.md](skills/obsidian-course-reading/references/output-spec.md) 为维护依据。调整共同内容要求时同步更新对话式 AI 指令；两种入口的工具、存储与展示方式各自适配。
 
+## 请我喝杯咖啡 ☕
+
+如果这个工具帮你读懂了一篇 reading，或让你上课多了一点底气，欢迎请我喝杯咖啡。
+
+项目会继续免费开源，打赏完全自愿。谢谢你的支持！
+
+| 微信支付 | 支付宝 |
+| :---: | :---: |
+| <img src="docs/support/wechat-pay.jpg" alt="微信支付收款二维码" width="260"> | <img src="docs/support/alipay.jpg" alt="支付宝收款二维码" width="260"> |
+
+点击图片可查看原图。
+
 ## 许可证
 
 本项目采用 [MIT License](LICENSE)。许可证适用于本仓库的代码与说明文件，不改变用户提供的论文、图片或其他第三方材料的权利归属。
