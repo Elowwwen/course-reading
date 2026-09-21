@@ -89,11 +89,9 @@ Skill 目录：[skills/obsidian-course-reading](skills/obsidian-course-reading/)
 
 Guide 内容规范以 [output-spec.md](skills/obsidian-course-reading/references/output-spec.md) 为维护依据。调整共同内容要求时同步更新对话式 AI 指令；两种入口的工具、存储与展示方式各自适配。
 
-## 请我喝杯咖啡 ☕
+## 请我喝杯奶茶 🥤
 
-如果这个工具帮你读懂了一篇 reading，或让你上课多了一点底气，欢迎请我喝杯咖啡。
-
-项目会继续免费开源，打赏完全自愿。谢谢你的支持！
+如果这个工具帮你读懂了一篇 reading，或让你上课多了一点底气，欢迎请我喝杯奶茶。
 
 | 微信支付 | 支付宝 |
 | :---: | :---: |
